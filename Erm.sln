@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Erm", "Erm\Erm.csproj", "{BC070C3C-7FCE-4345-83AA-3F2331D247B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Erm.PresentationLater.WebApi", "Erm.PresentationLater.WebApi\Erm.PresentationLater.WebApi.csproj", "{F3973167-93DA-4CD0-9ABE-A77E1454A845}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BC070C3C-7FCE-4345-83AA-3F2331D247B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC070C3C-7FCE-4345-83AA-3F2331D247B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC070C3C-7FCE-4345-83AA-3F2331D247B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC070C3C-7FCE-4345-83AA-3F2331D247B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3973167-93DA-4CD0-9ABE-A77E1454A845}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3973167-93DA-4CD0-9ABE-A77E1454A845}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3973167-93DA-4CD0-9ABE-A77E1454A845}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3973167-93DA-4CD0-9ABE-A77E1454A845}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {005C308A-6AD2-49CA-91BD-18ACF95E6E9F}
+	EndGlobalSection
+EndGlobal

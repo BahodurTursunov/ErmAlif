@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Erm.PresentationLater.WebApi.props" />
+</Project>
