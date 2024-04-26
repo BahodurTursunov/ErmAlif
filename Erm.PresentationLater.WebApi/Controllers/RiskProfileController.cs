@@ -2,54 +2,54 @@ using Erm.src.Erm.BusinessLayer;
 using Erm.src.Erm.BusinessLayer.Services;
 using Microsoft.AspNetCore.Mvc;
 
-[ApiController]
-[Route("api/riskprofiles")]
-public sealed class RiskProfileController(IRiskProfileService riskProfileService) : ControllerBase
+namespace Erm.PresentationLater.WebApi.Controllers
 {
-    private readonly IRiskProfileService _riskProfileService = riskProfileService;
-
-    [HttpPost]
-    public async Task<IActionResult> Create([FromBody] RiskProfileInfo riskProfileInfo)
+    [ApiController]
+    [Route("api/[controller]")]
+    public sealed class RiskProfileController : ControllerBase
     {
-        await _riskProfileService.CreateAsync(riskProfileInfo);
-        return Ok();
-    }
+        private readonly IRiskProfileService _riskProfileService;
 
-    [HttpGet]
-    public async Task<IActionResult> Query([FromQuery] string? query, [FromQuery] string? name)
-    {
-        if (!string.IsNullOrEmpty(query))
-            return Ok(await _riskProfileService.QueryAsync(query));
+        public RiskProfileController(IRiskProfileService riskProfileService)
+        {
+            _riskProfileService = riskProfileService;
+        }
 
-        if (!string.IsNullOrEmpty(name))
-            return Ok(await _riskProfileService.GetAsync(name));
+        [HttpPost("create")]
+        public async Task<IActionResult> Create([FromBody] RiskProfileInfo riskProfileInfo)
+        {
+            await _riskProfileService.CreateAsync(riskProfileInfo);
+            return Ok("Data added in DataBase");
+        }
 
-        return BadRequest();
-    }
+        [HttpGet("getQuery")]
+        public async Task<IActionResult> Query([FromQuery] string? query, [FromQuery] string? name)
+        {
+            if (!string.IsNullOrEmpty(query))
+                return Ok(await _riskProfileService.QueryAsync(query));
 
-    [HttpGet]
-    [Route("{name}")]
-    public async Task<IActionResult> GetByName([FromRoute] string name) =>
-        Ok(await _riskProfileService.GetAsync(name));
+            if (!string.IsNullOrEmpty(name))
+                return Ok(await _riskProfileService.GetAsync(name));
 
-    [HttpPut]
-    [Route("{name}")]
-    public async Task<IActionResult> Update([FromRoute] string name, [FromBody] RiskProfileInfo riskProfileInfo)
-    {
-        await _riskProfileService.UpdateAsync(name, riskProfileInfo);
-        return Ok();
-    }
+            return BadRequest();
+        }
 
-    [HttpDelete]
-    public async Task<IActionResult> Delete([FromQuery] string name)
-    {
-        await _riskProfileService.DeleteAsync(name);
-        return Ok();
-    }
+        [HttpGet("GetByName")]
+        public async Task<IActionResult> GetByName([FromRoute] string name) =>
+            Ok(await _riskProfileService.GetAsync(name));
 
-    [HttpGet("GetCalculateRisk")]
-    public async Task<IActionResult> GetCalculateRisk([FromQuery] string name)
-    {
-        return Ok(await _riskProfileService.CalculateRiskAsync(name));
+        [HttpPut("update")]
+        public async Task<IActionResult> Update([FromRoute] string nameForUpdate, [FromBody] RiskProfileInfo riskProfileInfo)
+        {
+            await _riskProfileService.UpdateAsync(nameForUpdate, riskProfileInfo);
+            return Ok();
+        }
+
+        [HttpDelete("delete")]
+        public async Task<IActionResult> Delete([FromQuery] string name)
+        {
+            await _riskProfileService.DeleteAsync(name);
+            return Ok($"Deleted <{name}> from Database");
+        }
     }
 }

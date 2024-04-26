@@ -1,3 +1,4 @@
+using Erm.PresentationLater.WebApi.Middleware;
 using Erm.src.Erm.BusinessLayer;
 using Erm.src.Erm.BusinessLayer.Mapper;
 using Erm.src.Erm.BusinessLayer.Services;
@@ -19,7 +20,8 @@ namespace Erm.PresentationWebApi
             builder.Services.AddAutoMapper(options
                 => options.AddProfile<RiskProfileInfoProfile>());
 
-            builder.Services.AddDbContext<ErmDbContext>(con => con.UseSqlServer("server=localhost;integrated security=True; database=ErmDatabase;TrustServerCertificate=true;"));
+            builder.Services.AddDbContext<ErmDbContext>(options => 
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection")));
 
             builder.Services.AddStackExchangeRedisCache(options
                 => options.Configuration = builder.Configuration.GetConnectionString("RedisConnection"));
@@ -27,8 +29,8 @@ namespace Erm.PresentationWebApi
             builder.Services.AddScoped<RiskProfileRepository>();
             builder.Services.AddScoped<RiskProfileRepositoryProxy>();
             builder.Services.AddScoped<IRiskProfileService, RiskProfileService>();
-
             builder.Services.AddScoped<IValidator<RiskProfileInfo>, RiskProfileInfoValidator>();
+
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -41,11 +43,12 @@ namespace Erm.PresentationWebApi
                 app.UseSwaggerUI();
             }
 
-            app.UseHttpsRedirection();
-
             app.UseAuthorization();
 
+            app.UseMiddleware<MiddlewareForApi>();
+
             app.MapControllers();
+            app.UseHttpsRedirection();
 
             app.Run();
         }

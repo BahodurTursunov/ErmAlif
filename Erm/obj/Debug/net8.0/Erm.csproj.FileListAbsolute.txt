@@ -12,3 +12,4 @@ C:\Users\tursu\source\repos\Erm\Erm\obj\Debug\net8.0\refint\Erm.dll
 C:\Users\tursu\source\repos\Erm\Erm\obj\Debug\net8.0\Erm.pdb
 C:\Users\tursu\source\repos\Erm\Erm\obj\Debug\net8.0\Erm.genruntimeconfig.cache
 C:\Users\tursu\source\repos\Erm\Erm\obj\Debug\net8.0\ref\Erm.dll
+C:\Users\tursu\source\repos\Erm\Erm\obj\Debug\net8.0\Erm.sourcelink.json
