@@ -11,7 +11,7 @@ using Project_ERM.src.Erm.DataAccess;
 namespace Erm.Migrations
 {
     [DbContext(typeof(ErmDbContext))]
-    [Migration("20240420210626_init")]
+    [Migration("20240426064539_init")]
     partial class init
     {
         /// <inheritdoc />

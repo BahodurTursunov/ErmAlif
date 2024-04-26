@@ -34,19 +34,19 @@ namespace Erm.PresentationLater.WebApi.Controllers
             return BadRequest();
         }
 
-        [HttpGet("GetByName")]
-        public async Task<IActionResult> GetByName([FromRoute] string name) =>
+        [HttpGet("GetByName/{name}")]
+        public async Task<IActionResult> GetByName(string name) =>
             Ok(await _riskProfileService.GetAsync(name));
 
-        [HttpPut("update")]
+        [HttpPut("update/{nameForUpdate}")]
         public async Task<IActionResult> Update([FromRoute] string nameForUpdate, [FromBody] RiskProfileInfo riskProfileInfo)
         {
             await _riskProfileService.UpdateAsync(nameForUpdate, riskProfileInfo);
             return Ok();
         }
 
-        [HttpDelete("delete")]
-        public async Task<IActionResult> Delete([FromQuery] string name)
+        [HttpDelete("delete/{name}")]
+        public async Task<IActionResult> Delete([FromRoute] string name)
         {
             await _riskProfileService.DeleteAsync(name);
             return Ok($"Deleted <{name}> from Database");

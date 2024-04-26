@@ -20,24 +20,23 @@ public sealed class RiskProfileRepository(ErmDbContext dbContext) : IRiskProfile
 
     public async Task<RiskProfile> GetAsync(string name, CancellationToken token = default)
         => await _db.RiskProfiles
-        .AsNoTracking()
-        .Include(i => i.BusinessProcess)
-        .SingleAsync(x => x.RiskName.Equals(name), token);
+                                .AsNoTracking()
+                                .Include(i => i.BusinessProcess)
+                                .SingleAsync(x => x.RiskName.Equals(name), token);
     public async Task<IEnumerable<RiskProfile>> GetAllAsync(string query, CancellationToken token = default)
     {
         return await _db.RiskProfiles
-            .AsNoTracking()
-            .Include(i => i.BusinessProcess)
-            .Where(x => x.RiskName.Contains(query) || x.Description.Contains(query))
-            .ToArrayAsync(token);
+                                    .AsNoTracking()
+                                    .Include(i => i.BusinessProcess)
+                                    .Where(x => x.RiskName.Contains(query) || x.Description.Contains(query))
+                                    .ToArrayAsync(token);
     }
-
     public async Task<IEnumerable<RiskProfile>> QueryAsync(string query, CancellationToken token = default)
         => await _db.RiskProfiles
-        .AsNoTracking()
-        .Include(i => i.BusinessProcess)
-        .Where(x => x.RiskName.Contains(query) || x.Description.Contains(query)).ToArrayAsync(token);
-
+                                .AsNoTracking()
+                                .Include(i => i.BusinessProcess)
+                                .Where(x => x.RiskName.Contains(query) || x.Description.Contains(query)).ToArrayAsync(token);
+    
     public async Task UpdateAsync(string name, RiskProfile riskProfile, CancellationToken token = default)
     {
         RiskProfile riskProfileToUpdate = await _db.RiskProfiles.SingleAsync(x => x.RiskName == name, token);

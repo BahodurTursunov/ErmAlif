@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using System.Text.Json.Serialization;
 using Erm.src.Erm.DataAccess;
 using Microsoft.Extensions.Caching.Distributed;
 using StackExchange.Redis;
@@ -26,8 +27,14 @@ public sealed class RiskProfileRepositoryProxy(IDistributedCache distributedCach
         if (string.IsNullOrEmpty(redisValue))
         {
             RiskProfile profileFromDb = await _originalRepository.GetAsync(name, token);
+            var options = new JsonSerializerOptions
+            {
+                ReferenceHandler = ReferenceHandler.Preserve
+            };
 
-            string redisProfileJson = JsonSerializer.Serialize(profileFromDb);
+            // Serialize or deserialize with the options
+            var redisProfileJson = JsonSerializer.Serialize(profileFromDb, options);
+            //string redisProfileJson = JsonSerializer.Serialize(profileFromDb);
 
             await _db.SetStringAsync(name, redisProfileJson, token);
 
